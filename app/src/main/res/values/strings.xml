@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">OsmAnd DecSync</string>
+    <!-- Settings Activity Title -->
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="settings_synchronize_now">Synchronize now</string>
+    <string name="settings_synchronizing_now">Synchronizing now</string>
+    <string name="settings_about">About OsmAnd DecSync</string>
+    <string name="settings_category_decsync">DecSync</string>
+    <string name="settings_decsync_enabled">Enable DecSync</string>
+    <string name="settings_decsync_enabled_description">Synchronize favorites between devices</string>
+    <string name="settings_decsync_dir_not_configured">No DecSync directory configured</string>
+    <string name="settings_category_theme">Theme</string>
+    <string name="settings_theme">Theme</string>
+    <string-array name="settings_theme_values" translatable="false">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="settings_theme_names">
+        <item>System default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+
+    <string name="decsync_disabled">DecSync support disabled</string>
+    <string name="channel_error_name">Errors</string>
+
+    <string name="osmand_logo">OsmAnd logo</string>
+    <string name="install_osmand_dialog_message">You need to install some version of OsmAnd, so you can test Intents API</string>
+    <string name="install_osmand">Install OsmAnd</string>
+</resources>

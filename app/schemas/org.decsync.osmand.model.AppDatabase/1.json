@@ -1,0 +1,154 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0699d8a16c4ebcbf4ab9a47b47a078aa",
+    "entities": [
+      {
+        "tableName": "favorites",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`favId` TEXT NOT NULL, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `catId` TEXT, PRIMARY KEY(`favId`))",
+        "fields": [
+          {
+            "fieldPath": "favId",
+            "columnName": "favId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lon",
+            "columnName": "lon",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "catId",
+            "columnName": "catId",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "favId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_favorites_favId",
+            "unique": true,
+            "columnNames": [
+              "favId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_favorites_favId` ON `${TABLE_NAME}` (`favId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`catId` TEXT NOT NULL, `name` TEXT NOT NULL, `colorTag` TEXT NOT NULL, `visible` INTEGER NOT NULL, PRIMARY KEY(`catId`))",
+        "fields": [
+          {
+            "fieldPath": "catId",
+            "columnName": "catId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "colorTag",
+            "columnName": "colorTag",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visible",
+            "columnName": "visible",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "catId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_categories_catId",
+            "unique": true,
+            "columnNames": [
+              "catId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_categories_catId` ON `${TABLE_NAME}` (`catId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "failed_entries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`path0` TEXT NOT NULL, `path1` TEXT NOT NULL, `key` TEXT NOT NULL, PRIMARY KEY(`path0`, `path1`, `key`))",
+        "fields": [
+          {
+            "fieldPath": "path0",
+            "columnName": "path0",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "path1",
+            "columnName": "path1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "path0",
+            "path1",
+            "key"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0699d8a16c4ebcbf4ab9a47b47a078aa')"
+    ]
+  }
+}

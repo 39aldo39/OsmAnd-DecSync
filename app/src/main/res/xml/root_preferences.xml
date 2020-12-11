@@ -1,0 +1,36 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceScreen
+        app:title="@string/settings_about">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://github.com/39aldo39/OsmAnd-DecSync" />
+    </PreferenceScreen>
+
+    <PreferenceCategory app:title="@string/settings_category_decsync">
+
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:key="decsync.enabled"
+            app:summary="@string/settings_decsync_enabled_description"
+            app:title="@string/settings_decsync_enabled" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/settings_category_theme">
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="theme"
+            android:defaultValue="-1"
+            android:title="@string/settings_theme"
+            android:entries="@array/settings_theme_names"
+            android:entryValues="@array/settings_theme_values"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
