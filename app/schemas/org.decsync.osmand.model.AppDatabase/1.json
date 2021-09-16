@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0699d8a16c4ebcbf4ab9a47b47a078aa",
+    "identityHash": "a84a30652aab7421e97df7fdfd87ae40",
     "entities": [
       {
         "tableName": "favorites",
@@ -109,46 +109,12 @@
           }
         ],
         "foreignKeys": []
-      },
-      {
-        "tableName": "failed_entries",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`path0` TEXT NOT NULL, `path1` TEXT NOT NULL, `key` TEXT NOT NULL, PRIMARY KEY(`path0`, `path1`, `key`))",
-        "fields": [
-          {
-            "fieldPath": "path0",
-            "columnName": "path0",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "path1",
-            "columnName": "path1",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "key",
-            "columnName": "key",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "path0",
-            "path1",
-            "key"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0699d8a16c4ebcbf4ab9a47b47a078aa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a84a30652aab7421e97df7fdfd87ae40')"
     ]
   }
 }

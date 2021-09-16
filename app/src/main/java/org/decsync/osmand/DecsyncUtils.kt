@@ -69,8 +69,8 @@ class DecsyncWorker(private val context: Context, params: WorkerParameters) : Wo
         try {
             val decsyncDir = DecsyncPrefUtils.getDecsyncDir(context) ?: throw Exception(context.getString(R.string.settings_decsync_dir_not_configured))
             val decsync = Decsync<Extra>(context, decsyncDir, "maps", null, ownAppId).apply {
-                addMultiListener(listOf("favorites"), DecsyncListeners::favoriteListener)
-                addMultiListener(listOf("categories"), DecsyncListeners::categoryListener)
+                addMultiListenerWithSuccess(listOf("favorites"), DecsyncListeners::favoriteListener)
+                addMultiListenerWithSuccess(listOf("categories"), DecsyncListeners::categoryListener)
             }
             val db = AppDatabase.createDatabase(context)
             val aidlHelper = OsmAndAidlHelper(context) {
@@ -85,7 +85,6 @@ class DecsyncWorker(private val context: Context, params: WorkerParameters) : Wo
                 // Delete all OsmAnd data, so we start fresh
                 db.favoriteDao().deleteAll()
                 db.categoryDao().deleteAll()
-                db.failedEntryDao().deleteAll()
 
                 // Populate the database with the DecSync data, so we can get the right mapping
                 // between the ids, otherwise all OsmAnd data would be considered insertions.
@@ -107,8 +106,6 @@ class DecsyncWorker(private val context: Context, params: WorkerParameters) : Wo
 
                     // Execute the DecSync updates
                     myDecsyncObserver.executeAllNewEntries()
-                    val storedEntries = db.failedEntryDao().all.map { it.getStoredEntry() }
-                    myDecsyncObserver.executeStoredEntries(storedEntries)
                 } catch (e: Exception) {
                     Log.w(TAG, e)
                     return Result.failure()

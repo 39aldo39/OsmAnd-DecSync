@@ -6,13 +6,12 @@ import org.decsync.library.Decsync
 import org.decsync.osmand.model.DecsyncCategory
 import org.decsync.osmand.model.DecsyncFavorite
 import org.decsync.osmand.model.DefaultDecsyncCategory
-import org.decsync.osmand.model.FailedEntry
 
 private const val TAG = "DecsyncListeners"
 
 @ExperimentalStdlibApi
 object DecsyncListeners {
-    fun favoriteListener(path: List<String>, entries: List<Decsync.Entry>, extra: Extra) {
+    fun favoriteListener(path: List<String>, entries: List<Decsync.Entry>, extra: Extra): Boolean {
         Log.d(TAG, "Execute favorite entries in $path: $entries")
         val favId = path[0]
         val prevFavorite = extra.db.favoriteDao().findById(favId)
@@ -81,10 +80,7 @@ object DecsyncListeners {
             }
         }
 
-        val failedEntries = entries.map { FailedEntry.fromFavoriteEntry(favId, it.key) }
         if (success) {
-            extra.db.failedEntryDao().delete(*failedEntries.toTypedArray())
-
             // Execute properties of new category
             categoryAdded?.let { category ->
                 extra.db.categoryDao().insert(category)
@@ -93,9 +89,9 @@ object DecsyncListeners {
                     isFromDecsyncListener = true
                 )
             }
-        } else {
-            extra.db.failedEntryDao().insert(*failedEntries.toTypedArray())
         }
+
+        return success
     }
 
     private fun updateFavorite(favorite: DecsyncFavorite, entries: List<Decsync.Entry>): Boolean? {
@@ -117,12 +113,12 @@ object DecsyncListeners {
         return added
     }
 
-    fun categoryListener(path: List<String>, entries: List<Decsync.Entry>, extra: Extra) {
+    fun categoryListener(path: List<String>, entries: List<Decsync.Entry>, extra: Extra): Boolean {
         Log.d(TAG, "Execute category entries in $path: $entries")
         val catId = path[0]
         val prevCategory = extra.db.categoryDao().findById(catId) ?: run {
             Log.i(TAG, "Unknown category")
-            return
+            return true
         }
         val newCategory = prevCategory.copy()
         updateCategory(newCategory, entries)
@@ -140,12 +136,7 @@ object DecsyncListeners {
             }
         }
 
-        val failedEntries = entries.map { FailedEntry.fromCategoryEntry(catId, it.key) }
-        if (success) {
-            extra.db.failedEntryDao().delete(*failedEntries.toTypedArray())
-        } else {
-            extra.db.failedEntryDao().insert(*failedEntries.toTypedArray())
-        }
+        return success
     }
 
     private fun updateCategory(category: DecsyncCategory, entries: List<Decsync.Entry>) {
