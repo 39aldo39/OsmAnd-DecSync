@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.decsync.library.DecsyncPrefUtils
 import java.util.concurrent.TimeUnit
 
+@ExperimentalStdlibApi
 class SettingsActivity : AppCompatActivity() {
     private var syncNowMenuItem: MenuItem? = null
 
@@ -39,7 +40,6 @@ class SettingsActivity : AppCompatActivity() {
         return true
     }
 
-    @ExperimentalStdlibApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sync_now -> {
@@ -58,7 +58,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
-        @ExperimentalStdlibApi
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
@@ -82,7 +81,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        @ExperimentalStdlibApi
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             DecsyncPrefUtils.chooseDecsyncDirResult(requireContext(), requestCode, resultCode, data) {
