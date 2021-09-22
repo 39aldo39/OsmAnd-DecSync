@@ -2,6 +2,7 @@
     <string name="app_name">OsmAnd DecSync</string>
     <!-- Settings Activity Title -->
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_intro">Introduction</string>
 
     <!-- Settings -->
     <string name="settings_synchronize_now">Synchronize now</string>
@@ -26,6 +27,25 @@
 
     <string name="decsync_disabled">DecSync support disabled</string>
     <string name="channel_error_name">Errors</string>
+    <string name="no_app_store">No app store available</string>
+
+    <!-- IntroActivity -->
+    <string name="intro_welcome_title">Welcome to OsmAnd DecSync</string>
+    <string name="intro_welcome_desc">OsmAnd DecSync synchronizes your favorites in OsmAnd using DecSync</string>
+    <string name="intro_install_osmand_title">Install OsmAnd</string>
+    <string name="intro_install_osmand_desc">OsmAnd needs to be installed</string>
+    <string name="intro_install_osmand_button">Install OsmAnd</string>
+    <string name="intro_install_osmand_select">Please install OsmAnd</string>
+    <string name="intro_configure_osmand_title">Configure OsmAnd</string>
+    <string name="intro_configure_osmand_desc">The storage location of OsmAnd needs to be changed to be available to other apps</string>
+    <string name="intro_configure_osmand_instructions">Make OsmAnd use the shared storage by selecting Settings → OsmAnd settings → Data storage folder → Shared memory. Then choose the favourites.gpx file in the relevant folder.</string>
+    <string name="intro_configure_osmand_button">Choose OsmAnd\'s favourites.gpx file</string>
+    <string name="intro_configure_osmand_incorrect_file">The selected file is not OsmAnd\'s favourites.gpx</string>
+    <string name="intro_configure_osmand_select">Please select the right file using the stated instructions</string>
+    <string name="intro_directory_title">DecSync Directory</string>
+    <string name="intro_directory_desc">To start synchronizing, all you have to do is synchronize the DecSync directory</string>
+    <string name="intro_directory_button">Choose directory</string>
+    <string name="intro_directory_select">Please select a DecSync directory</string>
 
     <string name="osmand_logo">OsmAnd logo</string>
     <string name="install_osmand_dialog_message">You need to install some version of OsmAnd, so you can test Intents API</string>

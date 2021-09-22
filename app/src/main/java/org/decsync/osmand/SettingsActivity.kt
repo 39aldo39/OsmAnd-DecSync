@@ -7,17 +7,12 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.preference.CheckBoxPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.google.android.material.snackbar.Snackbar
-import org.decsync.library.DecsyncPrefUtils
-import java.util.concurrent.TimeUnit
 
 @ExperimentalStdlibApi
 class SettingsActivity : AppCompatActivity() {
@@ -26,6 +21,14 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         PrefUtils.notifyTheme(this)
         super.onCreate(savedInstanceState)
+
+        if (!PrefUtils.getIntroDone(this)) {
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
         setContentView(R.layout.settings_activity)
         supportFragmentManager
                 .beginTransaction()
@@ -63,7 +66,9 @@ class SettingsActivity : AppCompatActivity() {
 
             findPreference<Preference>(PrefUtils.DECSYNC_ENABLED)?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                 if (newValue == true) {
-                    DecsyncPrefUtils.chooseDecsyncDir(this)
+                    val intent = Intent(requireActivity(), IntroActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                     false
                 } else {
                     (requireActivity() as SettingsActivity).syncNowMenuItem?.isEnabled = false
@@ -78,29 +83,6 @@ class SettingsActivity : AppCompatActivity() {
                 val mode = Integer.parseInt(newValue as String)
                 AppCompatDelegate.setDefaultNightMode(mode)
                 true
-            }
-        }
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-            DecsyncPrefUtils.chooseDecsyncDirResult(requireContext(), requestCode, resultCode, data) {
-                PrefUtils.setDecsyncEnabled(requireContext(), true)
-                findPreference<CheckBoxPreference>(PrefUtils.DECSYNC_ENABLED)?.isChecked = true
-                (requireActivity() as SettingsActivity).syncNowMenuItem?.isEnabled = true
-
-                val workManager = WorkManager.getInstance(requireContext())
-                val inputData = Data.Builder()
-                    .putBoolean(DecsyncWorker.KEY_IS_INIT_SYNC, true)
-                    .build()
-                val workRequest = OneTimeWorkRequest.Builder(DecsyncWorker::class.java)
-                    .setInputData(inputData)
-                    .build()
-                workManager.enqueue(workRequest)
-
-                val periodicWorkRequest = PeriodicWorkRequest.Builder(DecsyncWorker::class.java, 1, TimeUnit.HOURS)
-                    .setInitialDelay(1, TimeUnit.HOURS)
-                    .build()
-                workManager.enqueue(periodicWorkRequest)
             }
         }
     }

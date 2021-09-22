@@ -1,0 +1,5 @@
+<resources>
+    <!-- IntroActivity -->
+    <dimen name="intro_title">30sp</dimen>
+    <dimen name="intro_desc">16sp</dimen>
+</resources>

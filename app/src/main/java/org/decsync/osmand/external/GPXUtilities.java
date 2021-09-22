@@ -1,7 +1,7 @@
 package org.decsync.osmand.external;
 
 // Stripped from net.osmand.GPXUtilities
-// <https://github.com/osmandapp/OsmAnd/blob/1fd01594a08279c2bf698f83c2c353d719345414/OsmAnd-java/src/main/java/net/osmand/GPXUtilities.java>
+// <https://github.com/osmandapp/OsmAnd/blob/c62bd0ba46126e906baac560c47e9b29c840bc69/OsmAnd-java/src/main/java/net/osmand/GPXUtilities.java>
 
 import android.util.Log;
 
@@ -9,8 +9,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -191,6 +189,7 @@ public class GPXUtilities {
     }
 
     public static class TrkSegment extends GPXExtensions {
+        public String name = null;
         public List<WptPt> points = new ArrayList<>();
 
         public List<RouteSegment> routeSegments = new ArrayList<>();
@@ -279,7 +278,7 @@ public class GPXUtilities {
         }
     }
 
-    private static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
+    public static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
         int tok;
         StringBuilder text = null;
         while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -340,44 +339,15 @@ public class GPXUtilities {
         return time;
     }
 
-    public static GPXFile loadGPXFile(File f) {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(f);
-            GPXFile file = loadGPXFile(fis);
-            file.path = f.getAbsolutePath();
-            file.modifiedTime = f.lastModified();
-
-            try {
-                fis.close();
-            } catch (IOException e) {
-            }
-            return file;
-        } catch (IOException e) {
-            GPXFile res = new GPXFile(null);
-            res.path = f.getAbsolutePath();
-            Log.e(TAG, "Error reading gpx " + res.path, e); //$NON-NLS-1$
-            res.error = e;
-            return res;
-        } finally {
-            try {
-                if (fis != null)
-                    fis.close();
-            } catch (IOException ignore) {
-                // ignore
-            }
-        }
-    }
-
-    public static GPXFile loadGPXFile(InputStream f) {
+    public static GPXFile loadGPXFile(InputStream stream) {
         GPXFile gpxFile = new GPXFile(null);
         SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
         SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
         formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
-            XmlPullParser parser = new org.kxml2.io.KXmlParser();
-            parser.setInput(getUTF8Reader(f));
+            XmlPullParser parser = PlatformUtil.newXMLPullParser();
+            parser.setInput(getUTF8Reader(stream));
             Track routeTrack = new Track();
             TrkSegment routeTrackSegment = new TrkSegment();
             routeTrack.segments.add(routeTrackSegment);
@@ -563,7 +533,9 @@ public class GPXUtilities {
                                 parserState.push(wptPt);
                             }
                         } else if (parse instanceof TrkSegment) {
-                            if (tag.equals("trkpt") || tag.equals("rpt")) {
+                            if (tag.equals("name")) {
+                                ((TrkSegment) parse).name = readText(parser, "name");
+                            } else if (tag.equals("trkpt") || tag.equals("rpt")) {
                                 WptPt wptPt = parseWptAttributes(parser);
                                 ((TrkSegment) parse).points.add(wptPt);
                                 parserState.push(wptPt);
@@ -783,7 +755,7 @@ public class GPXUtilities {
             if (maxlat == null) {
                 maxlat = parser.getAttributeValue("", "maxLat");
             }
-            if (maxlat == null) {
+            if (maxlon == null) {
                 maxlon = parser.getAttributeValue("", "maxLon");
             }
 

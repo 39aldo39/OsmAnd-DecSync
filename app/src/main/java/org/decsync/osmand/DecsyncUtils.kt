@@ -125,9 +125,9 @@ class DecsyncWorker(private val context: Context, params: WorkerParameters) : Wo
 
     private fun writeOsmandUpdates(db: AppDatabase, myDecsyncObserver: MyDecsyncObserver, isInitSync: Boolean = false) {
         val lastOsmandProcessedUpdate = PrefUtils.getLastProcessedOsmandUpdate(context)
-        val lastOsmandUpdate = Utils.getLastOsmandUpdate(lastOsmandProcessedUpdate)
+        val lastOsmandUpdate = Utils.getLastOsmandUpdate(context)
         if (!isInitSync && lastOsmandProcessedUpdate >= lastOsmandUpdate) return
-        val osmandFavorites = Utils.getOsmandFavorites()
+        val osmandFavorites = Utils.getOsmandFavorites(context)
 
         val decsyncFavorites = db.favoriteDao().all
         val decsyncCategories = db.categoryDao().all

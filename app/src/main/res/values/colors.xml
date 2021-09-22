@@ -5,4 +5,11 @@
     <color name="colorAccent">#008BF8</color>
 
     <color name="dialogTitleBackgroundColor">#2f7af5</color>
+
+    <color name="bg_intro_bottom_bar">#20000000</color>
+    <color name="bg_intro_welcome">#EF6C00</color>
+    <color name="bg_intro_install_osmand">#0277BD</color>
+    <color name="bg_intro_configure_osmand">#F9A825</color>
+    <color name="bg_intro_directory">#009688</color>
+    <color name="img_intro_directory">#404040</color>
 </resources>

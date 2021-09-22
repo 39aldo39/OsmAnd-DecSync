@@ -29,7 +29,7 @@ data class DecsyncCategory(
 }
 
 object DefaultDecsyncCategory : DecsyncCategoryOrDefault() {
-    override val name = "default"
-    override val colorTag = "black"
+    override val name = "Favorites"
+    override val colorTag = "yellow"
     override val visible = true
 }

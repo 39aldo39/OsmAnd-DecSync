@@ -15,7 +15,7 @@ data class OsmandCategory(
 }
 
 object DefaultOsmandCategory : OsmandCategoryOrDefault() {
-    override val name = "default"
-    override val colorTag = "black"
+    override val name = "Favorites"
+    override val colorTag = "yellow"
     override val visible = true
 }

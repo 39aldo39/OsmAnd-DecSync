@@ -2,16 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.decsync.osmand">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- TODO, used for testing -->
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true"> <!-- TODO, used for testing -->
+        android:theme="@style/AppTheme">
         <activity
             android:name=".SettingsActivity"
             android:label="@string/app_name"
@@ -22,6 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".IntroActivity"
+            android:label="@string/title_activity_intro"
+            android:theme="@style/IntroTheme" />
     </application>
 
+    <!-- package visiblity – which apps do we need to see? -->
+    <queries>
+        <package android:name="net.osmand" />
+        <package android:name="net.osmand.plus" />
+    </queries>
 </manifest>

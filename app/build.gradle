@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -41,6 +42,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
     implementation "org.decsync:libdecsync:2.0.0"
     implementation "net.sf.kxml:kxml2:2.3.0"
+    implementation 'com.github.AppIntro:AppIntro:6.1.0'
 
     testImplementation 'junit:junit:4.13.2'
 }

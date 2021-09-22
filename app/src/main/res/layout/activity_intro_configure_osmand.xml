@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_intro_configure_osmand">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="32dp"
+        android:paddingBottom="@dimen/appintro2_bottombar_height"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/intro_configure_osmand_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/intro_configure_osmand_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/intro_title"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/intro_configure_osmand_desc"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/intro_desc" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontalScrollView"
+            android:layout_above="@+id/linearLayout3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_container"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="192dp"
+                    android:layout_height="320dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:srcCompat="@drawable/configure_0" />
+                <ImageView
+                    android:layout_width="192dp"
+                    android:layout_height="320dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:srcCompat="@drawable/configure_1" />
+                <ImageView
+                    android:layout_width="192dp"
+                    android:layout_height="320dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:srcCompat="@drawable/configure_2" />
+                <ImageView
+                    android:layout_width="192dp"
+                    android:layout_height="320dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:srcCompat="@drawable/configure_3" />
+                <ImageView
+                    android:layout_width="192dp"
+                    android:layout_height="320dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:srcCompat="@drawable/configure_4" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/intro_configure_osmand_instructions"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/intro_desc" />
+
+        <Button
+            android:id="@+id/intro_configure_osmand_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/intro_configure_osmand_button"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</ScrollView>

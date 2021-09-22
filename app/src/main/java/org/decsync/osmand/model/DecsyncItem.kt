@@ -47,7 +47,7 @@ object Maps {
         color: String,
         visible: Boolean
     ) : DecsyncItem {
-        override val type = "RssCategory"
+        override val type = "MapsCategory"
         override val id = catId
         override val idStoredEntry: StoredEntry? = null
         override val entries = mapOf(

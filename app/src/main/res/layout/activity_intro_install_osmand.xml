@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_intro_install_osmand">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/intro_install_osmand_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/intro_install_osmand_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/intro_title"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/ic_osmand_logo" />
+
+        <Button
+            android:id="@+id/intro_install_osmand_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/intro_install_osmand_button"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="64dp"
+            android:gravity="center"
+            android:text="@string/intro_install_osmand_desc"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/intro_desc" />
+
+    </LinearLayout>
+
+</RelativeLayout>
