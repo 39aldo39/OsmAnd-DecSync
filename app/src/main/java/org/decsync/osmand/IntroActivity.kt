@@ -49,11 +49,7 @@ class IntroActivity : AppIntro2() {
             try {
                 checkUriPermissions(this, decsyncDir)
             } catch (e: InsufficientAccessException) {
-                // TODO
-                //DecsyncPrefUtils.removeDecsyncDir(this)
-                val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-                editor.remove(DecsyncPrefUtils.DECSYNC_DIRECTORY)
-                editor.apply()
+                DecsyncPrefUtils.removeDecsyncDir(this)
             }
         }
 
